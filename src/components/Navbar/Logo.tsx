@@ -1,4 +1,3 @@
-import whiteLogo from '../../assets/beauty-log.png'
 import { Link } from 'react-router-dom'
 
 export const Logo = () => {
