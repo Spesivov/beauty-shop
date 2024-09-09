@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import InputMask from 'react-input-mask';
+import {SendRecall} from '../../utils/RecallSender'
 
-export const RecallModal = () => {
+export const СallbackForm = () => {
   return (
-    <Wrapper className="modal-wrapper">
-      <div className="modal-content">
+    <Wrapper className="callback-wrapper">
+      <div className="callback-content">
         <p>
           Request free consult with our manager.
         </p>
-        <PhoneInput/>
+        <PhoneInput />
         <SubmitCall />
       </div>
     </Wrapper>
@@ -17,7 +18,8 @@ export const RecallModal = () => {
 
 export const SubmitCall = () => {
   return (
-    <button className="submit-btn">
+    <button
+      className="submit-btn" onClick={SendRecall}>
       Submit
     </button>
   )
@@ -25,11 +27,11 @@ export const SubmitCall = () => {
 
 const PhoneInput = () => {
   return (
-    <InputMask 
-    className='number-input'
-    mask='+380 (99) 999-99-99' 
-    type="tel" 
-    placeholder=" Enter you number: +380 (__) ___-__-__">
+    <InputMask
+      className='number-input'
+      mask='+380 (99) 999-99-99'
+      type="tel"
+      placeholder="Enter you number: +380 (__) ___-__-__">
     </InputMask>
   )
 }
@@ -37,13 +39,13 @@ const PhoneInput = () => {
 export default PhoneInput
 
 const Wrapper = styled.div`
-  p {
+p {
     line-height: 2;
     max-width: 45rem;
     font-size: 1rem;
   }
   @media (min-width: 992px) {
-    .modal-content {
+    .callback-content {
       background: white;
       padding: 20px;
       border-radius: 5px;
@@ -71,6 +73,7 @@ const Wrapper = styled.div`
       width: 100px;
       padding: 0 20px;
       border: none;
+      border-radius: 20px; 
       background-color: #333;
       color: white;
       cursor: pointer;
