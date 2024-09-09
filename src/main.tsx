@@ -1,9 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
 import App from './App';
+import { ProductsProvider } from './context/ProductContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ProductsProvider>
+      <App />
+    </ProductsProvider>
   </StrictMode>
 );
