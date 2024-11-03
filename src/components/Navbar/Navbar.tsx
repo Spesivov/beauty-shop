@@ -1,14 +1,12 @@
 import styled from 'styled-components'
-import { Logo } from './Logo'
 import { NavLinks } from './NavLinks'
 import CartButton from '../button/CartButton'
 
-const Nav = () => {
+const Nav : React.FC = () => {
   return (
     <NavContainer>
       <div className='nav-center'>
         <div className='nav-header'>
-          <Logo />
         </div>
         <NavLinks className='nav-links' />
         <CartButton />
@@ -39,15 +37,6 @@ const NavContainer = styled.nav`
     justify-content: space-between;
     img {
       width: 125px;
-    }
-  }
-  .nav-toggle {
-    background: transparent;
-    border: transparent;
-    color: var(--clr-primary-5);
-    cursor: pointer;
-    svg {
-      font-size: 2rem;
     }
   }
   .nav-links {

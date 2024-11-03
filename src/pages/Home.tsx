@@ -1,5 +1,5 @@
-import Hero from "../components/Hero/Hero"
-import { СallbackForm } from "../components/Hero/Сallback"
+import Hero from "../components/hero/Hero"
+import { СallbackForm } from "../components/hero/Сallback"
 
 export function Home() {
   return (

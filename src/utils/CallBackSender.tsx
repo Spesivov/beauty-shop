@@ -2,7 +2,7 @@ import { Resend} from 'resend'
 
 const resend = new Resend(import.meta.env.VITE_BEAUTY_KEY);
 
-export async function SendRecall() {
+export async function SendMessage() {
   const { data, error } = await resend.emails.send({
     from: 'test-recall-emai@spes.dev',
     to: ['spesivov11@gmail.com'],

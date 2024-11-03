@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import InputMask from 'react-input-mask';
-import {SendRecall} from '../../utils/RecallSender'
+import { SendMessage } from '../../utils/CallBackSender'
 
-export const СallbackForm = () => {
+export const СallbackForm: React.FC = () => {
   return (
     <Wrapper className="callback-wrapper">
       <div className="callback-content">
@@ -16,23 +15,22 @@ export const СallbackForm = () => {
   )
 }
 
-export const SubmitCall = () => {
+export const SubmitCall: React.FC = () => {
   return (
     <button
-      className="submit-btn" onClick={SendRecall}>
+      className="btn submit-btn" onClick={SendMessage}>
       Submit
     </button>
   )
 }
 
-const PhoneInput = () => {
+const PhoneInput: React.FC = () => {
   return (
-    <InputMask
+    <input
       className='number-input'
-      mask='+380 (99) 999-99-99'
       type="tel"
-      placeholder="Enter you number: +380 (__) ___-__-__">
-    </InputMask>
+      placeholder="Enter your number: +380 (__) ___-__-__">
+    </input>
   )
 }
 
@@ -69,16 +67,11 @@ p {
       margin-top: -1rem;
     }
     .submit-btn {
-      line-height: 40px;
-      width: 100px;
-      padding: 0 20px;
-      border: none;
-      border-radius: 20px; 
-      background-color: #333;
-      color: white;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-bottom: -0.5rem;
+       line-height: 40px;
+       width: 100px;
+       padding: 0 20px;
+       border-radius: 20px; 
+       margin-bottom: -0.5rem;
     }
 }
 `

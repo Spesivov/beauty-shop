@@ -1,12 +1,12 @@
 import { UUID } from "crypto"
 
-type ProductLink = {
+interface IProductLink {
   id: UUID,
   text: string,
   url: string
 }
 
-export const links: ProductLink [] = [
+export const ProductLinks: IProductLink[] = [
   {
     id: crypto.randomUUID(),
     text: 'home',
@@ -14,12 +14,12 @@ export const links: ProductLink [] = [
   },
   {
     id: crypto.randomUUID(),
-    text: 'about',
-    url: '/about',
+    text: 'store',
+    url: '/store',
   },
   {
     id: crypto.randomUUID(),
-    text: 'store',
-    url: '/store',
+    text: 'about',
+    url: '/about',
   }
 ]

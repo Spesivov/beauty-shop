@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import ShopNowButton from '../button/ShopNowButton'
 import { BackgroundSlider } from '../slider/BackgroundSlider'
 
-export function Hero() {
+const Hero: React.FC = () => {
   return (
     <Wrapper className='section-right'>
       <section className='content'>

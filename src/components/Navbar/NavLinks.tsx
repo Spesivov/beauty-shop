@@ -1,13 +1,18 @@
 import React from "react";
-import { links } from "./ProductLinks";
 import { Link } from "react-router-dom";
-import {useProductsContext} from '../../context/productContext'
- 
-export const NavLinks: React.FC<{className: string, isSideBar?: boolean}> = ({className, isSideBar}) =>{
+import {useProductsContext} from '../../context/ProductContext'
+import {ProductLinks} from './ProductLinks'
+
+interface INavigationLink{
+  className: string,
+  isSideBar?: boolean
+}
+
+export const NavLinks: React.FC<INavigationLink> = ({className, isSideBar}) =>{
     const {closeSideBar} = useProductsContext();
     return (
         <ul className={className}>
-          {links.map(({ id, text, url }) => {
+          {ProductLinks.map(({ id, text, url }) => {
             return (
               <li key={id} onClick={isSideBar ? closeSideBar : undefined}>
                 <Link to={url}>{text}</Link>

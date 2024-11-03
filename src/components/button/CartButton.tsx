@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { FaShoppingCart } from 'react-icons/fa'
 
-const CartButton = () => {
+
+const CartButton: React.FC = () => {
     return (
         <Wrapper className='cart-btn-wrapper'>
             <Link to='/cart' className='cart-btn' aria-label='Go to cart'>
