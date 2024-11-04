@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { FaShoppingCart } from 'react-icons/fa'
-
+import { useCartContext } from '../../context/Cart_Context'
 
 const CartButton: React.FC = () => {
-    return (
-        <Wrapper className='cart-btn-wrapper'>
-            <Link to='/cart' className='cart-btn' aria-label='Go to cart'>
-                Cart
-                <span className='cart-container'>
-                    <FaShoppingCart />
-                    <span className='cart-value'>{0}</span>
-                </span>
-            </Link>
-        </Wrapper>
-    )
+  const { cartItems } = useCartContext();
+
+  return (
+    <Wrapper className='cart-btn-wrapper'>
+      <Link to='/cart' className='cart-btn' aria-label='Go to cart'>
+        Cart
+        <span className='cart-container'>
+          <FaShoppingCart />
+          <span className='cart-value'>{cartItems.length}</span>
+        </span>
+      </Link>
+    </Wrapper>
+  )
 }
 
 export default CartButton
@@ -47,9 +49,9 @@ const Wrapper = styled.div`
     position: absolute;
     top: -10px;
     right: -16px;
-    background: var(--clr-primary-5);
+    background: var(--clr-red-dark);
     width: 16px;
-    height: 16px;
+    height: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

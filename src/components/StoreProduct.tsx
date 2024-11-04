@@ -3,8 +3,14 @@ import styled from "styled-components"
 import { StarRating } from "./StarRating.tsx"
 import { formatPrice } from "../utils/utils.tsx"
 import { FaShoppingCart } from 'react-icons/fa'
+import { useCartContext } from '../context/Cart_Context.tsx'
 
 const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
+  const { dispatch } = useCartContext();
+  const nandleAddToCart = () => {
+    dispatch({ type: 'ADD_TO_CART', payload: product });
+  }
+
   return (
     <Wrapper>
       <div className="container">
@@ -12,12 +18,11 @@ const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
         <div className="product-content">
           <h5>{product.title}</h5>
           <StarRating rating={product.rating.rate} />
-          <p>{product.description}</p>
           <footer>
             <p className="price">{formatPrice(product.price)}</p>
-            <div className='product-cart'>
+            <button className='product-cart' onClick={nandleAddToCart}>
               <FaShoppingCart />
-            </div>
+            </button>
           </footer>
         </div>
       </div>
@@ -63,7 +68,7 @@ const Wrapper = styled.article`
   footer h3,
   footer p.price 
   { 
-      margin-top: 1rem;
+    margin-top: 1rem;
     color: var(--clr-black);
     letter-spacing: var(--spacing);
   }

@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { useFilterContext } from "../context/Filter_Context";
 
 const ProductSearch: React.FC = () => {
+    const { dispatch } = useFilterContext();
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch({ type: 'SET_FILTERS', payload: { searchTerm: e.target.value } });
+    };
+
     return (
         <Wrapper>
             <div className="form-control">
@@ -8,7 +14,8 @@ const ProductSearch: React.FC = () => {
                     type="text"
                     name="searchTerm"
                     placeholder="search"
-                    className="search-input" />
+                    className="search-input"
+                    onChange={handleSearchChange} />
             </div>
         </Wrapper>
     )

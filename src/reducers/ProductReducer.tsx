@@ -1,12 +1,8 @@
-import { initialState } from "../context/ProductContext";
+import { initialState } from "../context/Product_Context";
+import { Action } from "../types/Action";
 import Product from "../types/Product";
 
 const GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS";
-
-interface Action<T> {
-    type: string;
-    payload?: T[];
-}
 
 interface GetProductsSuccessAction extends Action<Product> {
     type: typeof GET_PRODUCTS_SUCCESS;

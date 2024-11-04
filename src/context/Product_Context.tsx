@@ -1,20 +1,14 @@
 import React, { useContext, useEffect, useReducer } from "react"
 import Product from '../types/Product.tsx'
 import axios from 'axios'
-import { ProductReducer } from "../reducers/ProducrReducer.tsx"
+import { ProductReducer } from "../reducers/ProductReducer.tsx"
 
 export type initialState = {
-    isSideBarOpen: boolean,
-    openSideBar: () => void,
-    closeSideBar: () => void,
     allProducts: Product[],
     areProductsLoading: boolean
 }
 
 const defaultState: initialState = {
-    isSideBarOpen: false,
-    openSideBar: () => { },
-    closeSideBar: () => { },
     allProducts: [],
     areProductsLoading: true
 }
@@ -23,7 +17,8 @@ interface ProductsProviderProps {
     children: React.ReactNode | React.ReactElement;
 }
 
-const ProductContext = React.createContext(defaultState)
+
+const ProductContext = React.createContext(defaultState);
 
 export const ProductsProvider: React.FC<ProductsProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(ProductReducer, defaultState)

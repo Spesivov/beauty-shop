@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import Product from './StoreProduct.tsx'
-import { useProductsContext } from '../context/ProductContext'
+import { useProductsContext } from '../context/Product_Context.tsx'
 import { Loader } from './Loader.tsx';
+import { useFilterContext } from '../context/Filter_Context.tsx';
 
 const ProductGrid: React.FC = () => {
-  const { allProducts } = useProductsContext();
   const { areProductsLoading } = useProductsContext();
+  const { filteredProducts } = useFilterContext();
 
   if (areProductsLoading) {
     return <Loader />
@@ -14,7 +15,7 @@ const ProductGrid: React.FC = () => {
   return (
     <Wrapper>
       <div className='products-container'>{
-        allProducts.map(product => {
+        filteredProducts.map(product => {
           return <Product key={product.id} product={product}></Product>
         })
       }

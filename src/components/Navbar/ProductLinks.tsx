@@ -1,24 +1,24 @@
-import { UUID } from "crypto"
+import { generateUUID } from '../../utils/utils';
 
 interface IProductLink {
-  id: UUID,
+  id: string,
   text: string,
   url: string
 }
 
 export const ProductLinks: IProductLink[] = [
   {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     text: 'home',
     url: '/',
   },
   {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     text: 'store',
     url: '/store',
   },
   {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     text: 'about',
     url: '/about',
   }
