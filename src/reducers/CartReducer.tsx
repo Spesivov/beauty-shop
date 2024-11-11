@@ -6,19 +6,28 @@ export const CartReducer = (state: CartState, action: Action<Product>): CartStat
     let newState: CartState;
     switch (action.type) {
         case 'GET_CART_ITEMS':
-            const addedProducts: Product[] = action.payload || [];
+            const addedProducts: Product[] = Array.isArray(action.payload) ? action.payload : [];
             newState = { ...state, cartItems: addedProducts };
             break;
 
         case 'ADD_TO_CART':
-            const updatedCartItems = [...state.cartItems, action.payload] as Product[];
-            newState = { ...state, cartItems: updatedCartItems};
+            const newCartItems = [...state.cartItems, action.payload] as Product[];
+            newState = { ...state, cartItems: newCartItems };
             break;
 
         case 'GET_ITEMS_COUNT':
             const cartCount = state.cartItems.length;
             newState = { ...state, amount: cartCount };
             break;
+
+        case 'REMOVE_PRODUCT':
+            const updatedCartItems = state.cartItems.filter(item => item.id !== (action.payload as Product).id);
+            newState = { ...state, cartItems: updatedCartItems };
+            break;
+
+        case 'TOGGLE_CART':
+            newState = { ...state, isCartSliderVisible: !state.isCartSliderVisible };
+            break
 
         default:
             newState = state;

@@ -6,9 +6,11 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { useCartContext } from '../context/Cart_Context.tsx'
 
 const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
-  const { dispatch } = useCartContext();
-  const nandleAddToCart = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
+  const { cartItems, dispatch } = useCartContext();
+  const handleAddToCart = () => {
+    if (!cartItems.find((item) => item.id === product.id)) {
+      dispatch({ type: 'ADD_TO_CART', payload: product });
+    }
   }
 
   return (
@@ -20,7 +22,7 @@ const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
           <StarRating rating={product.rating.rate} />
           <footer>
             <p className="price">{formatPrice(product.price)}</p>
-            <button className='product-cart' onClick={nandleAddToCart}>
+            <button className='product-cart' onClick={handleAddToCart}>
               <FaShoppingCart />
             </button>
           </footer>

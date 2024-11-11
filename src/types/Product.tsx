@@ -5,7 +5,9 @@ type Product = {
     slug?: string
     id: string,
     description: string,
-    rating: Rating
+    rating: Rating,
+    count: number
+    category: string
 }
 
 type Rating = {

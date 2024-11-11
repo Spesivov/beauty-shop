@@ -24,7 +24,6 @@ const NavContainer = styled.nav`
   justify-content: center;
   background: white;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-  margin-bottom: 0rem;
 
   .nav-center {
     width: 90vw;
@@ -40,9 +39,6 @@ const NavContainer = styled.nav`
     }
   }
   .nav-links {
-    display: none;
-  }
-  .cart-btn-wrapper {
     display: none;
   }
   @media (min-width: 992px) {
@@ -74,9 +70,6 @@ const NavContainer = styled.nav`
           border-bottom: 2px solid var(--clr-primary-7);
         }
       }
-    }
-    .cart-btn-wrapper {
-      display: grid;
     }
   }
 `

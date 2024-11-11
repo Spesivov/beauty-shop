@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ProductsHeader from "../components/ProductsHeader";
 import ProductGrid from "../components/ProductGrid";
 import ProductSearch from "../components/ProductSearch";
+import CartSlider from "../components/slider/CartSlider";
 
 export function Store() {
   return (
@@ -11,6 +12,7 @@ export function Store() {
         <div className="section-center products">
           <ProductSearch />
           <ProductGrid></ProductGrid>
+          <CartSlider />
         </div>
       </Wrapper>
     </main>
