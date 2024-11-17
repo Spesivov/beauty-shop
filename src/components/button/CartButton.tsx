@@ -4,7 +4,7 @@ import { useCartContext } from '../../context/Cart_Context';
 import CartSlider from '../slider/CartSlider';
 
 const CartButton: React.FC = () => {
-  const { cartItems, dispatch, isCartSliderVisible } = useCartContext();
+  const { cartItems, dispatch } = useCartContext();
 
   const handleToggle = () => {
     dispatch({ type: 'TOGGLE_CART' });
@@ -16,7 +16,7 @@ const CartButton: React.FC = () => {
         <FaShoppingCart />
         <span className='cart-value'>{cartItems.length}</span>
       </span>
-      <CartSlider isVisible={isCartSliderVisible} />
+      <CartSlider />
     </Wrapper>
   )
 }

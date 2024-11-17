@@ -1,22 +1,19 @@
 import { useCartContext } from "../../context/Cart_Context";
 import { FaPlus, FaMinus, FaTrash, FaTimes } from 'react-icons/fa';
 import styled from "styled-components";
+import { formatPrice } from "../../utils/utils";
 
-interface CartSliderProps {
-  isVisible: boolean;
-}
-
-const CartSlider: React.FC<CartSliderProps> = ({ isVisible }) => {
-  const { cartItems, dispatch, getTotalPrice, increaseProductQuantity, decreaseProductQuantity, calculateProductPrice, removeProduct, getProductCount } = useCartContext();
+const CartSlider: React.FC = () => {
+  const { cartItems, isCartSliderVisible, dispatch, getTotalPrice, increaseProductCount, decreaseProductCount, calculateProductPrice, removeProduct, getProductCount } = useCartContext();
 
   const closeSlider = () => {
     dispatch({ type: 'TOGGLE_CART' });
   };
 
-  const totalPrice = getTotalPrice();
+  const totalPrice = formatPrice(getTotalPrice());
 
   return (
-    <Wrapper className={`cart-slider ${isVisible ? 'visible' : ''}`}>
+    <Wrapper className={`cart-slider ${isCartSliderVisible ? 'visible' : ''}`}>
       <h4 className="cart-header">Shopping Cart
         <span className="close-cart" onClick={closeSlider}>
           <FaTimes />
@@ -29,14 +26,14 @@ const CartSlider: React.FC<CartSliderProps> = ({ isVisible }) => {
               <img src={item.image} alt={item.title} />
               <div className="items-details">
                 <h4>{item.title}</h4>
-                <h5>${calculateProductPrice(item.id)}</h5>
+                <h5>{formatPrice(calculateProductPrice(item.id))}</h5>
               </div>
               <div className="product-actions">
-                <span className="add-quantity" onClick={() => increaseProductQuantity(item.id)}>
+                <span className="add-quantity" onClick={() => increaseProductCount(item)}>
                   <FaPlus />
                 </span>
                 <span className="product-count">{getProductCount(item.id)}</span>
-                <span className="remove-quantity" onClick={() => decreaseProductQuantity(item.id)}>
+                <span className="remove-quantity" onClick={() => decreaseProductCount(item)}>
                   <FaMinus />
                 </span>
               </div>
@@ -50,7 +47,7 @@ const CartSlider: React.FC<CartSliderProps> = ({ isVisible }) => {
         })}
       </div>
       <div className="product-checkout">
-        <h4>Total: ${totalPrice}</h4>
+        <h4>Total: {totalPrice}</h4>
         <button className="btn btn-checkout">Checkout</button>
       </div>
     </Wrapper>

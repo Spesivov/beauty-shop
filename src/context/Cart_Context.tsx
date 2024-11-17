@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect, useState } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import Product from "../types/Product";
 import { CartReducer } from '../reducers/CartReducer';
 
@@ -6,12 +6,13 @@ export interface CartState {
     cartItems: Product[];
     total: number;
     amount: number;
+    count: number;
     isCartSliderVisible: boolean;
-    increaseProductQuantity: (id: string) => void;
-    decreaseProductQuantity: (id: string) => void;
-    calculateProductPrice: (id: string) => string;
+    increaseProductCount: (product: Product) => void;
+    decreaseProductCount: (product: Product) => void;
+    calculateProductPrice: (id: string) => number;
     getProductCount: (id: string) => number;
-    getTotalPrice: () => string;
+    getTotalPrice: () => number;
     removeProduct: (product: Product) => void;
 }
 
@@ -19,12 +20,13 @@ export const defaultState: CartState = {
     cartItems: [],
     total: 0,
     amount: 0,
+    count: 0,
     isCartSliderVisible: false,
-    increaseProductQuantity: () => null,
-    decreaseProductQuantity: () => null,
-    calculateProductPrice: () => "0.00",
-    getProductCount: () => 0,
-    getTotalPrice: () => "0.00",
+    increaseProductCount: () => null,
+    decreaseProductCount: () => null,
+    calculateProductPrice: () => 0,
+    getProductCount: () => 1,
+    getTotalPrice: () => 0,
     removeProduct: () => null
 };
 
@@ -36,50 +38,40 @@ type CartContextType = CartState & { dispatch: React.Dispatch<any> };
 
 const CartContext = React.createContext<CartContextType>({
     ...defaultState,
-    increaseProductQuantity: () => null,
-    decreaseProductQuantity: () => null,
-    calculateProductPrice: () => "0.00",
-    getProductCount: () => 0,
-    removeProduct: () => null,
-    getTotalPrice: () => "0.00",
     dispatch: () => null
 });
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(CartReducer, defaultState);
-    const [productCount, setproductCount] = useState<{ [productId: string]: number }>({});
 
-    const increaseProductQuantity = (id: string) => setproductCount(prevCount => {
-        const product = state.cartItems.find(item => item.id === id);
-        if (!product) return prevCount;
+    const increaseProductCount= (product: Product) => {
+        dispatch({
+            type: 'INCREASE_PRODUCT_COUNT',
+            payload: product
+        });
+    };
 
-        return {
-            ...prevCount,
-            [id]: (prevCount[id] || 1) + 1
-        };
-    });
-
-    const decreaseProductQuantity = (id: string) => setproductCount(prevCount => {
-        const product = state.cartItems.find(item => item.id === id);
-        if (!product) return prevCount;
-
-        return {
-            ...prevCount,
-            [id]: Math.max((prevCount[id] || 0) - 1, 0)
-        };
-    });
+    const decreaseProductCount = (product: Product) => {
+        dispatch({
+            type: 'DECREASE_PRODUCT_COUNT',
+            payload: product
+        });
+    };
 
     const calculateProductPrice = (id: string) => {
         const product = state.cartItems.find(item => item.id === id);
-        if (!product) return "0.00";
+        if (!product || typeof product.price !== 'number') return 0;
+        
+        console.log(`Product price is ${product.price} and count is ${product.count}`);
+        return product.price * product.count;
+    };
 
-        return (product.price * (productCount[id] || 1)).toFixed(2);
-    }
-
-    const getProductCount = (id: string) => productCount[id] || 1;
+    const getProductCount = (id: string): number => {
+        const product = state.cartItems.find(item => item.id === id);
+        return product ? product.count : 0;
+    };
   
     const removeProduct = (product: Product) => {
-        console.log("Removing product with id", product.id, state.cartItems.length);
         dispatch({ type: "REMOVE_PRODUCT", payload: product });
 
         if(state.cartItems.length === 1) {
@@ -87,8 +79,14 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
     }
 
-    const getTotalPrice = () => state.cartItems.reduce((total, item) => total + item.price, 0).toFixed(2).toString();;
-   
+    const getTotalPrice = () => {
+        return state.total;
+    };
+
+    useEffect(() => {
+        dispatch({ type: "UPDATE_TOTALS" });
+    }, [state.cartItems]);
+    
     useEffect(() => {
         try {
             const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -100,7 +98,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }, []);
 
     return (
-        <CartContext.Provider value={{ ...state, removeProduct, getTotalPrice, getProductCount, calculateProductPrice, decreaseProductQuantity, increaseProductQuantity, dispatch }}>
+        <CartContext.Provider value={{ ...state, getTotalPrice, removeProduct, getProductCount, calculateProductPrice, decreaseProductCount, increaseProductCount, dispatch }}>
             {children}
         </CartContext.Provider>
     );

@@ -7,8 +7,8 @@ export const FilterReducer = (state: FilterState, action: Action<Product>): Filt
     switch (action.type) {
         case 'FILTER_PRODUCTS':
             const { searchTerm } = state.filters;
-            const allProducts: Product[] = action.payload || [];
-            let filteredProducts: Product [] = allProducts?.filter(product => {
+            const allProducts: Product[] = (action.payload as Product[]) || [];
+            let filteredProducts: Product[] = allProducts?.filter(product => {
                 return product.title.toLowerCase().includes(searchTerm.toLowerCase());
             });
 
