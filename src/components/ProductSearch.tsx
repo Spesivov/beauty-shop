@@ -8,22 +8,22 @@ const ProductSearch: React.FC = () => {
     };
 
     return (
-        <Wrapper>
-            <div className="form-control">
-                <input
-                    type="text"
-                    name="searchTerm"
-                    placeholder="search"
-                    className="search-input"
-                    onChange={handleSearchChange} />
-            </div>
+        <Wrapper className="form-control">
+            <input
+                type="text"
+                name="searchTerm"
+                placeholder="search"
+                className="search-input"
+                onChange={handleSearchChange} />
         </Wrapper>
     )
 }
 
 export default ProductSearch
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
+max-height: 50px;
+margin-left: 2rem;
 .search-input {
     padding: 0.5rem;
     background: var(--clr - grey - 10);

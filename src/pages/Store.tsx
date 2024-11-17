@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import ProductsHeader from "../components/ProductsHeader";
 import ProductGrid from "../components/ProductGrid";
 import ProductSearch from "../components/ProductSearch";
 import CartSlider from "../components/slider/CartSlider";
@@ -7,11 +6,10 @@ import CartSlider from "../components/slider/CartSlider";
 export function Store() {
   return (
     <main>
-      <ProductsHeader title='Products' />
       <Wrapper>
-        <div className="section-center products">
+        <div className="products">
           <ProductSearch />
-          <ProductGrid></ProductGrid>
+          <ProductGrid />
           <CartSlider />
         </div>
       </Wrapper>
@@ -21,7 +19,8 @@ export function Store() {
 
 const Wrapper = styled.div`
   .products {
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     gap: 3rem 1.5rem;
     margin: 4rem auto;
   }

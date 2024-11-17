@@ -15,7 +15,7 @@ const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
 
   return (
     <Wrapper>
-      <div className="container">
+      <div className="product-container">
         <img src={product.image} />
         <div className="product-content">
           <h5>{product.title}</h5>
@@ -35,11 +35,13 @@ const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
 export default StoreProduct
 
 const Wrapper = styled.article`
-  .container {
+  .product-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    max-height: 350px;
+    max-width: 300px;
+    margin-right: 2rem;
     position: relative;
     border-radius: 20px;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
