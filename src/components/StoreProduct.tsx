@@ -19,14 +19,15 @@ const StoreProduct: React.FC<{ product: Product }> = ({ product }) => {
         <img src={product.image} />
         <div className="product-content">
           <h5>{product.title}</h5>
-          <StarRating rating={product.rating.rate} />
-          <footer>
+          <p className='product-category'>{product.category}</p>
+          <StarRating rating={product.rating.rate} />        
+        </div>
+        <footer>
             <p className="price">{formatPrice(product.price)}</p>
             <button className='product-cart' onClick={handleAddToCart}>
               <FaShoppingCart />
             </button>
           </footer>
-        </div>
       </div>
     </Wrapper>
   )
@@ -38,8 +39,9 @@ const Wrapper = styled.article`
   .product-container {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     justify-content: space-between;
-    max-height: 350px;
+    max-height: 400px;
     max-width: 300px;
     margin-right: 2rem;
     position: relative;
@@ -48,7 +50,7 @@ const Wrapper = styled.article`
   }
 
   img {
-    margin-top: 1rem;
+    padding: 1rem;
     width: 100%;
     display: block;
     object-fit: contain;
@@ -57,7 +59,7 @@ const Wrapper = styled.article`
   }
 
   .product-content {
-    margin: 1rem 1rem 0 1rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -66,19 +68,19 @@ const Wrapper = styled.article`
   footer {
     display: flex;
     justify-content: space-between;
-    margin-top: auto;
+    margin: 0rem 0.5rem 0.5rem 1rem;
   }
   
   footer h3,
   footer p.price 
   { 
-    margin-top: 1rem;
     color: var(--clr-black);
     letter-spacing: var(--spacing);
   }
 
   .stars {
     margin-bottom: 1rem;
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
   }
@@ -95,11 +97,24 @@ const Wrapper = styled.article`
     border: 1px solid black;
     padding: 10px;
     box-sizing: border-box;
-    margin: 10px;
+    max-height: 35px;
   }
 
   .product-cart:hover {
     cursor: pointer;
     opacity: 0.5;
   }
+  .product-category {
+    font-size: 0.75rem;
+    color: var(--clr-grey-5);
+    text-transform: capitalize;
+    margin-bottom: auto;
+  }
+  .product-content h5 {
+    width: 100%;
+    height: 3em; 
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    line-height: 1.5em;
+}
 `
