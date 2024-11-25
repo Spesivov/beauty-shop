@@ -21,11 +21,21 @@ const defaultState: FilterState = {
     }
 };
 
+export type FilterAction =
+    | { type: 'FILTER_PRODUCTS'; payload: Product[] }
+    | { type: 'SORT_PRODUCTS' }
+    | {
+        type: 'SET_FILTERS'; payload: {
+            searchTerm: string;
+        }
+    };
+
+
 interface FilterProviderProps {
     children: React.ReactNode | React.ReactElement;
 }
 
-type FilterContextType = FilterState & { dispatch: React.Dispatch<any> };
+type FilterContextType = FilterState & { dispatch: React.Dispatch<FilterAction> };
 
 const FilterContext = React.createContext<FilterContextType>({
     ...defaultState,
@@ -38,7 +48,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
     useEffect(() => {
         dispatch({ type: "FILTER_PRODUCTS", payload: allProducts });
-        dispatch({ type: "SORT_PRODUCTS"}); //will add diff kind of sorting later
+        dispatch({ type: "SORT_PRODUCTS" }); //will add diff kind of sorting later
     }, [allProducts, state.sort, state.filters]);
 
     return (

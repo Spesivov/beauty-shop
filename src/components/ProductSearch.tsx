@@ -22,7 +22,6 @@ const ProductSearch: React.FC = () => {
 export default ProductSearch
 
 const Wrapper = styled.div`
-max-height: 50px;
 margin-left: 2rem;
 .search-input {
     padding: 0.5rem;
@@ -32,4 +31,5 @@ margin-left: 2rem;
 }
 .search-input::placeholder {
     text-transform: capitalize;
-}`
+}
+ `

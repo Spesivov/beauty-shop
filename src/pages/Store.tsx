@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import ProductGrid from "../components/ProductGrid";
-import ProductSearch from "../components/ProductSearch";
 import CartSlider from "../components/slider/CartSlider";
+import ProductExporer from "../components/ProductExplorer";
 
 export function Store() {
   return (
     <main>
       <Wrapper>
         <div className="products">
-          <ProductSearch />
+          <ProductExporer />
           <ProductGrid />
           <CartSlider />
         </div>

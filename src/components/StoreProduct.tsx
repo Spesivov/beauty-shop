@@ -79,16 +79,13 @@ const Wrapper = styled.article`
   }
 
   .stars {
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
   }
-
   .star {
-    color: gold;
+    color: #ffd700;
   }
-  
   .product-cart {
     display: flex;
     align-items: center;
@@ -99,7 +96,6 @@ const Wrapper = styled.article`
     box-sizing: border-box;
     max-height: 35px;
   }
-
   .product-cart:hover {
     cursor: pointer;
     opacity: 0.5;

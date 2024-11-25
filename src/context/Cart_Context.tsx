@@ -1,6 +1,7 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import Product from "../types/Product";
 import { CartReducer } from '../reducers/CartReducer';
+import { Action } from '../types/Action';
 
 export interface CartState {
     cartItems: Product[];
@@ -34,7 +35,7 @@ interface CartProviderProps {
     children: React.ReactNode | React.ReactElement;
 }
 
-type CartContextType = CartState & { dispatch: React.Dispatch<any> };
+type CartContextType = CartState & { dispatch: React.Dispatch<Action<Product>> };
 
 const CartContext = React.createContext<CartContextType>({
     ...defaultState,
@@ -44,7 +45,7 @@ const CartContext = React.createContext<CartContextType>({
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(CartReducer, defaultState);
 
-    const increaseProductCount= (product: Product) => {
+    const increaseProductCount = (product: Product) => {
         dispatch({
             type: 'INCREASE_PRODUCT_COUNT',
             payload: product
@@ -61,7 +62,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const calculateProductPrice = (id: string) => {
         const product = state.cartItems.find(item => item.id === id);
         if (!product || typeof product.price !== 'number') return 0;
-        
+
         console.log(`Product price is ${product.price} and count is ${product.count}`);
         return product.price * product.count;
     };
@@ -70,11 +71,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         const product = state.cartItems.find(item => item.id === id);
         return product ? product.count : 0;
     };
-  
+
     const removeProduct = (product: Product) => {
         dispatch({ type: "REMOVE_PRODUCT", payload: product });
 
-        if(state.cartItems.length === 1) {
+        if (state.cartItems.length === 1) {
             dispatch({ type: "TOGGLE_CART" });
         }
     }
@@ -86,7 +87,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     useEffect(() => {
         dispatch({ type: "UPDATE_TOTALS" });
     }, [state.cartItems]);
-    
+
     useEffect(() => {
         try {
             const cart = JSON.parse(localStorage.getItem("cart") || "[]");

@@ -1,18 +1,11 @@
-import { initialState } from "../context/Product_Context";
+import { ProductState } from "../context/Product_Context";
 import { Action } from "../types/Action";
 import Product from "../types/Product";
 
-const GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS";
-
-interface GetProductsSuccessAction extends Action<Product> {
-    type: typeof GET_PRODUCTS_SUCCESS;
-    payload: Product[];
-}
-
-export const ProductReducer = (state: initialState, action: GetProductsSuccessAction) => {
+export const ProductReducer = (state: ProductState, action: Action<Product>): ProductState => {
     switch (action.type) {
         case 'GET_PRODUCTS_SUCCESS':
-            return { ...state, allProducts: action.payload, areProductsLoading: false };
+            return { ...state, allProducts: action.payload as Product[], areProductsLoading: false };
         default:
             return state;
     }
